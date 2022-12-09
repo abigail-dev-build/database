@@ -1,0 +1,104 @@
+@use "variables" as variable;
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+}
+.header {
+  width: 100%;
+  height: 56px;
+  background-color: variable.$secondary-color;
+  padding: 8px 64px;
+  h1 {
+    font-family: variable.$font-family;
+    font-size: variable.$bold-font-size;
+    font-weight: variable.$large-font-weight;
+    color: variable.$primary-color;
+  }
+}
+
+.main {
+  background-color: variable.$background-color;
+  height: 100%;
+  flex-grow: 1;
+  padding: 0 64px;
+  width: 100%;
+  .emptyBox {
+    width: 308px;
+    height: 108px;
+    padding: 16px;
+    margin-top: 64px;
+    background: #ffffff;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.05),
+      0px 16px 32px rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+    h2 {
+      font-family: variable.$font-family;
+      color: variable.$primary-color;
+      font-size: variable.$bold-font-size;
+      font-weight: variable.$bold-font-weight;
+    }
+    button {
+      background-color: variable.$button-color;
+      padding: 8px 16px;
+      color: variable.$primary-color;
+      font-size: variable.$base-font-size;
+      font-weight: variable.$base-font-weight;
+      border-radius: 4px;
+      cursor: pointer;
+      outline: none;
+      border: none;
+    }
+  }
+}
+
+// .main {
+//   flex: 1;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+
+// scss syntax
+// .button{
+//   color:white;
+//   border-radius: 20px;
+//   outline:none;
+//   border: none;
+//   background-color:#0070f3 ;
+//   height: 35px;
+//   &:hover{
+//     background-color: red;
+//     cursor: pointer;
+//   }
+// }
+
+@media (max-width: 600px) {
+  .header {
+    padding: 8px 16px;
+  }
+  .main {
+    padding: 0 16px;
+  }
+  // .grid {
+  //   width: 100%;
+  //   flex-direction: column;
+  // }
+}
+
+// @media (prefers-color-scheme: dark) {
+//   .card,
+//   .footer {
+//     border-color: #222;
+//   }
+//   .code {
+//     background: #111;
+//   }
+//   .logo img {
+//     filter: invert(1);
+//   }
+// }
