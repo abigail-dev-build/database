@@ -2,11 +2,12 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Form from "../components/form";
 import { addUserEP, editSubmitEP } from '../services/endpoint';
 import SingleUser from "../components/singleUser";
+import Layout from '../components/layout';
 
 jest.mock('../services/endpoint');
 
 describe("Components", () => {
-  describe('Form', () => {
+  describe('Add Form', () => {
     beforeEach(() => {
       addUserEP?.mockReturnValue(Promise.resolve({
         status: 201,
@@ -20,7 +21,7 @@ describe("Components", () => {
       }));
      
     });
-    it("should render form component", async () => {
+    it("should render add user form component", async () => {
       const props = {
         closeModal: jest.fn(),
         setShowModal: jest.fn(),
@@ -36,11 +37,10 @@ describe("Components", () => {
         fireEvent.submit(screen.getByTestId('form'));
       });
       fireEvent.click(screen.getByTestId('cancel-button'))
-      // expect(addUserEP).toHaveBeenCalledTimes(1);
     });
   })
 
-  describe('', () => {
+  describe('Edit Form', () => {
     beforeEach(() => {
       editSubmitEP?.mockReturnValue(Promise.resolve({
         status: 200,
@@ -53,7 +53,7 @@ describe("Components", () => {
         },
       }));
     })
-    it('', async () => {
+    it('hould render edit user form component', async () => {
       const props = {
         userid : 7,
         closeModal: jest.fn(),
@@ -87,5 +87,12 @@ describe("Components", () => {
     render(<SingleUser {...props} />)
     fireEvent.click(screen.getByTestId('user'))
     fireEvent.mouseDown(screen.getByTestId('user'))
+  })
+
+  it('should render component layout', () => {
+    const props = {
+      children: <div>hello</div>
+    }
+    render(<Layout {...props} />)
   })
 });

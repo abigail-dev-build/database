@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",

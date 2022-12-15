@@ -5,8 +5,7 @@ import { userIcon, forwardIcon } from "./svg";
 
 type Props = {
   firstName: string;
-  key: any;
-  lastObject: any;
+  key: string;
   lastName: string;
   createdAt: any;
   userId: any;
@@ -29,7 +28,6 @@ const SingleUser = ({
   lastName,
   createdAt,
   userId,
-  lastObject,
 }: Props) => {
 
   const cookies = new Cookies();
