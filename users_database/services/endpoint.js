@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.NEXT_PUBLIC_DATABASE_BASEURL;
+const baseURL = 'https://6180472f8bfae60017adfa54.mockapi.io';
 
 
 export const getUserDatabase = async () => axios.get(`${baseURL}/users`);
