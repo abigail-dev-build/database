@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Form from "../components/form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.scss";
 import { editIcon, hamburgerIcon, cancelIcon } from "../components/svg";
 import QueryUserDatabase from "../services/useQuery";
@@ -18,8 +18,17 @@ const Home: NextPage = () => {
   const [displayContent, setDisplayContent] = useState("");
   const [userDetail, setUserDetails] = useState<any>({});
 
-  const openModal = () => {
+  const lastObject = database?.data?.[database?.data?.length - 1];
+
+  useEffect(() => {
+    if(lastObject) {
+      setUserDetails({userId: lastObject.id, userFname: lastObject.firstName, userLname: lastObject.lastName, time: lastObject.createdAt})
+    }
+  }, [lastObject])
+
+  const openAddUserModal = () => {
     setShowModal(!showModal);
+    setUserDetails({});
   };
 
   if (isLoading)
@@ -27,7 +36,7 @@ const Home: NextPage = () => {
       <Layout>
       <div className={styles.emptyBox}>
         <h2>No users yet</h2>
-        <button type="button" onClick={openModal} data-testid="add-user">
+        <button type="button" onClick={openAddUserModal} data-testid="add-user">
           {" "}
           + Add User
         </button>
@@ -35,8 +44,6 @@ const Home: NextPage = () => {
 
       </Layout>
     );
-
-  const lastObject = database?.data?.[database?.data?.length - 1];
 
   const reversedUserData = [...database?.data]?.reverse();
 
@@ -54,7 +61,7 @@ const Home: NextPage = () => {
   };
 
   const editUser = (id: string, fName: string, lName: string) => {
-    openModal();
+    setShowModal(!showModal);
     cookies.set("userid", id);
     cookies.set("userFirst", fName);
     cookies.set("userLast", lName);
@@ -100,7 +107,7 @@ const Home: NextPage = () => {
               }
             )}
           </div>
-          <button className={styles.addUser} type="button" onClick={openModal}>
+          <button className={styles.addUser} type="button" onClick={openAddUserModal}>
             {" "}
             + Add User
           </button>
@@ -117,9 +124,9 @@ const Home: NextPage = () => {
               data-testid="open-edit-modal"
               onClick={() =>
                 editUser(
-                  userDetail?.userId,
-                  userDetail?.userFname,
-                  userDetail?.userLname
+                  userDetail?.userId || lastObject?.id,
+                  userDetail?.userFname || lastObject?.firstName,
+                  userDetail?.userLname || lastObject?.lastName
                 )
               }
             >
@@ -164,6 +171,7 @@ const Home: NextPage = () => {
         <Form
           setShowModal={setShowModal}
           closeModal={closeModal}
+          initial={lastObject}
           userid={userDetail?.userId}
           refetch={refetch}
           userDetail={userDetail}

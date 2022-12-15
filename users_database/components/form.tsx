@@ -12,6 +12,7 @@ type ButtonProps = {
   setUserDetails: React.Dispatch<React.SetStateAction<any>>;
   userDetail: any;
   userid: any;
+  initial: any;
   refetch: () => void;
 };
 
@@ -32,6 +33,7 @@ const Form = ({
   userid,
   setUserDetails,
   userDetail,
+  initial,
 }: ButtonProps) => {
   const cookies = new Cookies();
 
@@ -44,7 +46,7 @@ const Form = ({
     mode: "onChange",
   });
 
-  const intialId = cookies.get("singleIdUser");
+  const initialId = cookies.get("singleIdUser");
   const firstName = cookies.get("userFirst");
   const lastName = cookies.get("userLast");
 
@@ -88,7 +90,7 @@ const Form = ({
         <div className={styles.formContainer}>
           <div className={styles.formHeader}>
             <h2 className={styles.formTitle}>
-              {userid === intialId ? "Edit User" : "Add User"}
+              {userid ? "Edit User" : "Add User"}
             </h2>
             <p className={styles.formClose} onClick={closeModal}>
               x
@@ -110,7 +112,7 @@ const Form = ({
                 pattern: /^[A-Za-z]+$/,
               })}
               errors={errors?.firstName}
-              defaultValue={userid ? firstName || userDetail?.userFname : ""}
+              defaultValue={userid ? firstName || userDetail?.userFname  || initial?.firstName: ""}
             />
             <TextInput
               type="text"
