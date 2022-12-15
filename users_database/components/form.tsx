@@ -46,7 +46,6 @@ const Form = ({
     mode: "onChange",
   });
 
-  const initialId = cookies.get("singleIdUser");
   const firstName = cookies.get("userFirst");
   const lastName = cookies.get("userLast");
 
@@ -112,7 +111,11 @@ const Form = ({
                 pattern: /^[A-Za-z]+$/,
               })}
               errors={errors?.firstName}
-              defaultValue={userid ? firstName || userDetail?.userFname  || initial?.firstName: ""}
+              defaultValue={
+                userid
+                  ? firstName || userDetail?.userFname || initial?.firstName
+                  : ""
+              }
             />
             <TextInput
               type="text"
