@@ -4,9 +4,9 @@
   height: 100vh;
   display: flex;
   flex-flow: column;
+  overflow-y: scroll;
 }
 .header {
-  width: 100%;
   height: 56px;
   background-color: variable.$secondary-color;
   padding: 8px 64px;
@@ -23,7 +23,6 @@
   height: 100%;
   flex-grow: 1;
   padding: 0 64px;
-  width: 100%;
   .emptyBox {
     width: 308px;
     height: 108px;
@@ -34,12 +33,6 @@
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.05),
       0px 16px 32px rgba(0, 0, 0, 0.03);
     border-radius: 8px;
-    h2 {
-      font-family: variable.$font-family;
-      color: variable.$primary-color;
-      font-size: variable.$bold-font-size;
-      font-weight: variable.$bold-font-weight;
-    }
     button {
       background-color: variable.$button-color;
       padding: 8px 16px;
@@ -51,54 +44,181 @@
       outline: none;
       border: none;
     }
+    h2 {
+      color: variable.$primary-color;
+      font-family: variable.$font-family;
+      font-size: variable.$bold-font-size;
+      font-weight: variable.$bold-font-weight;
+    }
+  }
+}
+.burger {
+  display: none;
+}
+
+.gridContainer {
+  display: grid;
+  column-gap: 32px;
+  grid-template-columns: 1fr 3fr;
+  padding-top: 64px;
+}
+.gridItem1,
+.gridItem2 {
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), 0px 16px 32px rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+}
+.gridItem1 {
+  width: 308px;
+  height: 339px;
+  padding: 16px;
+  .userData {
+    overflow-y: scroll;
+    height: 296px;
+  }
+}
+.gridItem2 {
+  height: 277px;
+  padding: 32px;
+}
+.user {
+  display: flex;
+  padding: 0px 14px 10px 14px;
+  justify-content: space-between;
+  cursor: pointer;
+  // &:first-child{
+  //   background-color: #EAEAEA;
+  //       border-radius: 4px;
+  //       padding: 0px 14px 10px 14px;
+  // }
+  .groupName {
+    display: flex;
+    .icon {
+      padding-top: 17px;
+    }
+    .name {
+      color: variable.$neutral-color;
+      font-family: variable.$font-family;
+      font-size: variable.$medium-font-size;
+      font-weight: variable.$medium-font-weight;
+      margin-left: 14px;
+    }
+  }
+  .arrow {
+    padding-top: 17px;
+  }
+}
+.addUser {
+  background-color: variable.$button-color;
+  padding: 8px 16px;
+  color: variable.$primary-color;
+  font-size: variable.$base-font-size;
+  font-weight: variable.$base-font-weight;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin-top: 16px;
+  span {
+    margin-right: 9px;
+    padding-top: 15px;
+  }
+}
+.group2Header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #ececec;
+  p {
+    color: variable.$primary-color;
+    font-size: variable.$medium-font-size;
+    font-weight: variable.$bold-font-weight;
+  }
+}
+.userDescription {
+  margin-top: 24px;
+  width: 50%;
+  .userRow {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    .userKey {
+      color: variable.$primary-color;
+      font-size: variable.$base-font-size;
+      font-weight: variable.$base-font-weight;
+    }
+    .userValue {
+      color: variable.$primary-color;
+      font-size: variable.$base-font-size;
+      font-weight: variable.$bold-font-weight;
+    }
   }
 }
 
-// .main {
-//   flex: 1;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-
-// scss syntax
-// .button{
-//   color:white;
-//   border-radius: 20px;
-//   outline:none;
-//   border: none;
-//   background-color:#0070f3 ;
-//   height: 35px;
-//   &:hover{
-//     background-color: red;
-//     cursor: pointer;
-//   }
-// }
-
-@media (max-width: 600px) {
+@media only screen and (min-width: 321px) and (max-width: 600px) {
   .header {
     padding: 8px 16px;
   }
   .main {
     padding: 0 16px;
   }
-  // .grid {
-  //   width: 100%;
-  //   flex-direction: column;
-  // }
+  .gridContainer {
+    display: block;
+    padding-top: 28px;
+  }
+  .gridItem1 {
+    display: none;
+    animation-duration: 3s;
+    animation-name: mymove;
+    margin-bottom: 24px;
+    animation-iteration-count: 1;
+    width: 330px;
+  }
+  .gridItem2 {
+    // width: 330px;
+    padding: 32px 16px;
+    height: 460px;
+    margin-bottom: 24px;
+    z-index: 100;
+  }
+  .userDescription {
+    width: 100%;
+  }
+  .userRow {
+    display: flex;
+  }
+  .userKey {
+    width: 127px;
+  }
+  .burger {
+    display: block;
+    padding-top: 36px;
+    cursor: pointer;
+  }
+  @keyframes mymove {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
 }
 
-// @media (prefers-color-scheme: dark) {
-//   .card,
-//   .footer {
-//     border-color: #222;
-//   }
-//   .code {
-//     background: #111;
-//   }
-//   .logo img {
-//     filter: invert(1);
-//   }
-// }
+@media only screen and (min-width: 600px) and (max-width: 1024px) {
+  .header {
+    padding: 8px 16px;
+  }
+  .main {
+    padding: 0 16px;
+  }
+  .userDescription {
+    width: 100%;
+  }
+  .gridItem2 {
+    padding: 32px;
+  }
+}
